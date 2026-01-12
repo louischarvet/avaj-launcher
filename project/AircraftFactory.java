@@ -6,11 +6,11 @@ public class AircraftFactory {
 
 		switch (p_type) {
 			case "Helicopter":
-				return Helicopter(id++, p_name, p_coordinates);
+				return new Helicopter(id++, p_name, p_coordinates);
 			case "JetPlane":
-				return JetPlane(id++, p_name, p_coordinates);
+				return new JetPlane(id++, p_name, p_coordinates);
 			case "Baloon":
-				return Baloon(id++, p_name, p_coordinates);
+				return new Baloon(id++, p_name, p_coordinates);
 			default:
 				return null;
 		}

@@ -1,4 +1,4 @@
-// package
+package avajlauncher;
 
 public class Tower {
 	private List< Flyable* >	observers;
