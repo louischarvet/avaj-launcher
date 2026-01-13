@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import avajlauncher.InvalidFormatException;
 import avajlauncher.InvalidValueException;
 
+import avajlauncher.AircraftPlan;
+
 public class Parser {
 	private	static List< String >	aircraftTypes;
 	private static List< String >	lines;
@@ -92,12 +94,12 @@ public class Parser {
 		this.aircraftPlans = new ArrayList<>();
 
 		while (it.hasNext()) {
-			String	splittedLine = it.next().split(" ");
-			String	type = splittedLine[0],
-				name = splittedLine[1];
-			int	longitude = Integer.parseInt(splittedLine[2]),
-				latitude = Integer.parseInt(splittedLine[3]),
-				height = Integer.parseInt(splittedLine[4]);
+			String	splitLine[] = (it.next()).split(" ");
+			String	type = splitLine[0],
+				name = splitLine[1];
+			int	longitude = Integer.parseInt(splitLine[2]),
+				latitude = Integer.parseInt(splitLine[3]),
+				height = Integer.parseInt(splitLine[4]);
 			this.aircraftPlans.add(new AircraftPlan(
 				type, name, longitude, latitude, height));
 		}
@@ -111,40 +113,7 @@ public class Parser {
 		return this.ok;
 	}
 
-	private class AircraftPlan {
-		private String	type,
-			name;
-		private int	longitude,
-			latitude,
-			height;
-		
-		public AircraftPlan(String p_type, String p_name,
-			int p_longitude, int p_latitude, int p_height) {
-			this.type = p_type;
-			this.name = p_name;
-			this.longitude = p_longitude;
-			this.latitude = p_latitude;
-			this.height = p_height;
-		}
-
-		public String	getType() {
-			return this.type;
-		}
-
-		public String	getName() {
-			return this.name;
-		}
-
-		public int	getLongitude() {
-			return this.longitude;
-		}
-
-		public int	getLatitude() {
-			return this.latitude;
-		}
-
-		public int	getHeight() {
-			return this.height;
-		}
+	public List< AircraftPlan >	getAircraftPlans() {
+		return this.aircraftPlans;
 	}
 }
