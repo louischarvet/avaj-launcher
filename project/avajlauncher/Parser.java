@@ -15,14 +15,8 @@ public class Parser {
 	private	static List< String >	aircraftTypes;
 	private static List< String >	lines;
 	private static int	numberOfIterations;
+	private static List< AircraftPlan >	aircraftPlans;
 	private boolean	ok;
-
-	public static void main(String args[]) {
-		if (args.length < 1)
-			System.out.println("Wrong number of arguments.\n"
-				+ "Usage: java Parser <file path>");
-//		this(args[0]);
-	}
 
 	public Parser(String filePath) {
 		this.ok = false;
@@ -35,13 +29,14 @@ public class Parser {
 
 			this.lines = readFile(filePath);
 			checkLines();
+			parseLines();
 			this.ok = true;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
-	private static List< String >	readFile(String filePath) {
+	private static List< String >	readFile(String filePath) throws Exception {
 		List< String >	linesList = new ArrayList<>();
 		Scanner scanner = new Scanner(new File(filePath));
 
@@ -55,14 +50,14 @@ public class Parser {
 		return linesList;
 	}
 
-	private void checkLines() {
+	private void checkLines() throws Exception {
 		ListIterator< String >	it = this.lines.listIterator();
 
 		if (!it.hasNext())
 			throw new InvalidFormatException("Empty file");
 
 		String firstLine = it.next();
-		this.numberOfIterations = Integer.parseInt(firstLine); // throws NumberFormatException
+//		this.numberOfIterations = Integer.parseInt(firstLine); // throws NumberFormatException
 
 		if (!it.hasNext())
 			throw new InvalidFormatException("No aircraft set");
@@ -82,7 +77,7 @@ public class Parser {
 				throw new InvalidValueException("Aircraft type", words[0],
 					"Must be one of Helicopter, JetPlane or Baloon");
 
-			for (int i = 2; i < size; i++) {
+			for (int i = 2; i < size; i++) { // maybe useless (see parseLines())
 				if (Integer.parseInt(words[i]) < 0)
 					throw new InvalidValueException("Coordinate", words[i],
 						"Must be positive integer. If height > 100, it will be set to 100.");
@@ -90,7 +85,66 @@ public class Parser {
 		}
 	}
 
+	private void	parseLines() throws Exception {
+		ListIterator< String >	it = lines.listIterator();
+
+		this.numberOfIterations = Integer.parseInt(it.next());
+		this.aircraftPlans = new ArrayList<>();
+
+		while (it.hasNext()) {
+			String	splittedLine = it.next().split(" ");
+			String	type = splittedLine[0],
+				name = splittedLine[1];
+			int	longitude = Integer.parseInt(splittedLine[2]),
+				latitude = Integer.parseInt(splittedLine[3]),
+				height = Integer.parseInt(splittedLine[4]);
+			this.aircraftPlans.add(new AircraftPlan(
+				type, name, longitude, latitude, height));
+		}
+	}
+
 	public List< String >	getLines() {
 		return this.lines;
+	}
+
+	public boolean	isOk() {
+		return this.ok;
+	}
+
+	private class AircraftPlan {
+		private String	type,
+			name;
+		private int	longitude,
+			latitude,
+			height;
+		
+		public AircraftPlan(String p_type, String p_name,
+			int p_longitude, int p_latitude, int p_height) {
+			this.type = p_type;
+			this.name = p_name;
+			this.longitude = p_longitude;
+			this.latitude = p_latitude;
+			this.height = p_height;
+		}
+
+		public String	getType() {
+			return this.type;
+		}
+
+		public String	getName() {
+			return this.name;
+		}
+
+		public int	getLongitude() {
+			return this.longitude;
+		}
+
+		public int	getLatitude() {
+			return this.latitude;
+		}
+
+		public int	getHeight() {
+			return this.height;
+		}
 	}
 }
