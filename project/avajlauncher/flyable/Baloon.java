@@ -1,6 +1,6 @@
-package avajlauncher;
+package avajlauncher.flyable;
 
-import avajlauncher.Aircraft;
+//import avajlauncher.Aircraft;
 import avajlauncher.Coordinates;
 
 public class Baloon extends Aircraft {

@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.ArrayList;
 
-import avajlauncher.InvalidFormatException;
-import avajlauncher.InvalidValueException;
+//import avajlauncher.exception;
+import avajlauncher.exception.InvalidFormatException;
+import avajlauncher.exception.InvalidValueException;
 
 import avajlauncher.AircraftPlan;
 

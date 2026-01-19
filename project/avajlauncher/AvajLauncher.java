@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 import avajlauncher.Parser;
-import avajlauncher.Flyable;
+import avajlauncher.AircraftPlan;
+
+import avajlauncher.AircraftFactory;
+
+import avajlauncher.flyable.Flyable;
+
 import avajlauncher.WeatherProvider;
 
 public class AvajLauncher {
@@ -24,7 +29,7 @@ public class AvajLauncher {
 //		System.out.println();
 //		System.out.println(parser.getAircraftPlans());
 
-		AircraftFactory	aircraftFactory = new AircraftFactory();
+		AircraftFactory	aircraftFactory = AircraftFactory.getInstance();
 		List< Flyable >	flyables = new ArrayList<>();
 		List< AircraftPlan >	aircraftPlans = parser.getAircraftPlans();
 		ListIterator< AircraftPlan >	it = aircraftPlans.listIterator();
@@ -39,6 +44,6 @@ public class AvajLauncher {
 			));
 		}
 
-		WeatherProvider weatherProvider = new WeatherProvider();
+		WeatherProvider weatherProvider = WeatherProvider.getInstance();
 	}
 }

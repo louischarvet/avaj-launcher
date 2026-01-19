@@ -1,4 +1,4 @@
-package avajlauncher;
+package avajlauncher.exception;
 
 import java.lang.Exception;
 
