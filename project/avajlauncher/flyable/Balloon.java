@@ -3,10 +3,8 @@ package avajlauncher.flyable;
 //import avajlauncher.Aircraft;
 import avajlauncher.Coordinates;
 
-import avajlauncher.WeatherProvider;
-
-public class Helicopter extends Aircraft {
-	public Helicopter(long p_id, String p_name, Coordinates p_coordinate) {
+public class Balloon extends Aircraft {
+	public Balloon(long p_id, String p_name, Coordinates p_coordinate) {
 		super(p_id, p_name, p_coordinate);
 	}
 
@@ -18,20 +16,20 @@ public class Helicopter extends Aircraft {
 
 		switch (currentWeather) {
 			case "RAIN":
-				announcement = "Helicopter rain";
-				this.updateCoordinates(5, 0, 0);
+				announcement = "Balloon rain";
+				this.updateCoordinates(0, 0, -5);
 				break;
 			case "FOG":
-				announcement = "Helicopter fog";
-				this.updateCoordinates(1, 0, 0);
+				announcement = "Balloon fog";
+				this.updateCoordinates(0, 0, 3);
 				break;
 			case "SUN":
-				announcement = "Helicopter sun";
-				this.updateCoordinates(10, 0, 2);
+				announcement = "Balloon sun";
+				this.updateCoordinates(2, 0, 4);
 				break;
 			case "SNOW":
-				announcement = "Helicopter snow";
-				this.updateCoordinates(0, 0, 12);
+				announcement = "Balloon snow";
+				this.updateCoordinates(0, 0, 15);
 				break;
 			default:
 				break;

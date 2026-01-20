@@ -3,7 +3,7 @@ package avajlauncher.flyable;
 //import avajlauncher.Flyable;
 import avajlauncher.Coordinates;
 
-public abstract class Aircraft implements Flyable {
+public abstract class Aircraft extends Flyable {
 	protected long	id;
 	protected String	name;
 	protected Coordinates	coordinates;
@@ -18,15 +18,15 @@ public abstract class Aircraft implements Flyable {
 		this.coordinates = coordinates.newCoordinates(longitude, latitude, height);
 	}
 
-	protected long	getId() {
+	public long	getId() {
 		return this.id;
 	}
 
-	protected String	getName() {
+	public String	getName() {
 		return this.name;
 	}
 
-	protected Coordinates	getCoordinates() {
+	public Coordinates	getCoordinates() {
 		return this.coordinates;
 	}
 }

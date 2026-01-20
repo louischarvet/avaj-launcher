@@ -29,21 +29,30 @@ public class AvajLauncher {
 //		System.out.println();
 //		System.out.println(parser.getAircraftPlans());
 
-		AircraftFactory	aircraftFactory = AircraftFactory.getInstance();
+//		AircraftFactory	aircraftFactory = AircraftFactory.getInstance();
 		List< Flyable >	flyables = new ArrayList<>();
 		List< AircraftPlan >	aircraftPlans = parser.getAircraftPlans();
-		ListIterator< AircraftPlan >	it = aircraftPlans.listIterator();
+		// ListIterator< AircraftPlan >	it = aircraftPlans.listIterator();
 
-		while (it.hasNext()) {
-			AircraftPlan	aircraftPlan = it.next();
+		// while (it.hasNext()) {
+			// AircraftPlan	aircraftPlan = it.next();
+		WeatherTower	weatherTower = new WeatherTower();
 
-			flyables.add(aircraftFactory.newAircraft(
+		for (AircraftPlan aircraftPlan : aircraftPlans) {
+			flyables.add(AircraftFactory.newAircraft(
 				aircraftPlan.getType(),
 				aircraftPlan.getName(),
 				aircraftPlan.getCoordinates()
 			));
 		}
 
-		WeatherProvider weatherProvider = WeatherProvider.getInstance();
+		for (Flyable flyable : flyables) {
+			weatherTower.register(flyable);
+			flyable.registerTower(weatherTower);
+		}
+
+		// run simulation
+
+		weatherTower.changeWeather();
 	}
 }

@@ -28,7 +28,7 @@ public class Parser {
 			this.aircraftTypes = new ArrayList<>();
 			this.aircraftTypes.add("Helicopter");
 			this.aircraftTypes.add("JetPlane");
-			this.aircraftTypes.add("Baloon");
+			this.aircraftTypes.add("Balloon");
 
 			this.lines = readFile(filePath);
 			checkLines();
@@ -67,7 +67,7 @@ public class Parser {
 
 		while (it.hasNext()) {
 			String	line = it.next();
-			if (!line.matches("^(Helicopter|Baloon|JetPlane) [a-zA-Z0-9]+ \\d+ \\d+ \\d+$"))
+			if (!line.matches("^(Helicopter|Balloon|JetPlane) [a-zA-Z0-9]+ \\d+ \\d+ \\d+$"))
 				throw new InvalidFormatException("Bad line format: " + line);
 
 			String	words[] = line.split(" ");
@@ -78,7 +78,7 @@ public class Parser {
 
 			if (!this.aircraftTypes.contains(words[0]))
 				throw new InvalidValueException("Aircraft type", words[0],
-					"Must be one of Helicopter, JetPlane or Baloon");
+					"Must be one of Helicopter, JetPlane or Balloon");
 
 			for (int i = 2; i < size; i++) { // maybe useless (see parseLines())
 				if (Integer.parseInt(words[i]) < 0)

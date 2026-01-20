@@ -8,7 +8,44 @@ public class JetPlane extends Aircraft {
 		super(p_id, p_name, p_coordinate);
 	}
 
+	@Override
 	public void	updateConditions() {
-		//
+		// String	currentWeather = WeatherProvider.getCurrentWeather(this.coordinates);
+		String	currentWeather = this.weatherTower.getWeather(this.coordinates);
+		String	announcement = new String();
+
+		switch (currentWeather) {
+			case "RAIN":
+				announcement = "JetPlane rain";
+				this.updateCoordinates(5, 0, 0);
+				break;
+			case "FOG":
+				announcement = "JetPlane fog";
+				this.updateCoordinates(0, 1, 0);
+				break;
+			case "SUN":
+				announcement = "JetPlane sun";
+				this.updateCoordinates(0, 10, -2);
+				break;
+			case "SNOW":
+				announcement = "JetPlane snow";
+				this.updateCoordinates(0, 0, -7);
+				break;
+			default:
+				break;
+		}
+
+		System.out.println(
+			this.getClass().getSimpleName() + "#" + this.getName()
+			+ "(" + this.getId() + "): "
+			+ announcement
+		);
+
+		if (this.coordinates.getHeight() <= 0) {
+			System.out.println(
+				this.getClass().getSimpleName() + "#" + this.getName()
+				+ "(" + this.getId() + ") landing"
+			);
+		}
 	}
 }

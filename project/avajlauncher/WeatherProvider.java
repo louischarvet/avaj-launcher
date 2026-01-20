@@ -18,7 +18,7 @@ public final class	WeatherProvider {
 		setWeatherMap();
 	}
 
-	public final static WeatherProvider	getInstance() {
+	public final static WeatherProvider	getInstance() { // inutile ?
 		if (WeatherProvider.instance == null) {
 			synchronized(WeatherProvider.class) {
 				if (WeatherProvider.instance == null)
@@ -40,7 +40,7 @@ public final class	WeatherProvider {
 		}
 	}
 
-	public String	getCurrentWeather(Coordinates p_coordinates) {
+	public static String	getCurrentWeather(Coordinates p_coordinates) {
 		int	longitude = p_coordinates.getLongitude(),
 			latitude = p_coordinates.getLatitude(),
 			height = p_coordinates.getHeight();
