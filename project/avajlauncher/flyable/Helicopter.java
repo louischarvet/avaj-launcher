@@ -12,26 +12,26 @@ public class Helicopter extends Aircraft {
 
 	@Override
 	public void	updateConditions() {
-		// String	currentWeather = WeatherProvider.getCurrentWeather(this.coordinates);
 		String	currentWeather = this.weatherTower.getWeather(this.coordinates);
 		String	announcement = new String();
+		String	previousCoordinates = this.coordinates.toString();
 
 		switch (currentWeather) {
 			case "RAIN":
-				announcement = "Helicopter rain";
+				announcement = "Helicopter rain ";
 				this.updateCoordinates(5, 0, 0);
 				break;
 			case "FOG":
-				announcement = "Helicopter fog";
+				announcement = "Helicopter fog ";
 				this.updateCoordinates(1, 0, 0);
 				break;
 			case "SUN":
-				announcement = "Helicopter sun";
+				announcement = "Helicopter sun ";
 				this.updateCoordinates(10, 0, 2);
 				break;
 			case "SNOW":
-				announcement = "Helicopter snow";
-				this.updateCoordinates(0, 0, 12);
+				announcement = "Helicopter snow ";
+				this.updateCoordinates(0, 0, -12);
 				break;
 			default:
 				break;
@@ -43,11 +43,15 @@ public class Helicopter extends Aircraft {
 			+ announcement
 		);
 
+		System.out.println("\t" + previousCoordinates + " -> " + this.coordinates.toString());
+
 		if (this.coordinates.getHeight() <= 0) {
+			this.flying = false;
 			System.out.println(
 				this.getClass().getSimpleName() + "#" + this.getName()
 				+ "(" + this.getId() + ") landing"
 			);
-		}
+		} else
+			this.flying = true;
 	}
 }

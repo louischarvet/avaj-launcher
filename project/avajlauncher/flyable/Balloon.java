@@ -1,6 +1,5 @@
 package avajlauncher.flyable;
 
-//import avajlauncher.Aircraft;
 import avajlauncher.Coordinates;
 
 public class Balloon extends Aircraft {
@@ -10,26 +9,26 @@ public class Balloon extends Aircraft {
 
 	@Override
 	public void	updateConditions() {
-		// String	currentWeather = WeatherProvider.getCurrentWeather(this.coordinates);
 		String	currentWeather = this.weatherTower.getWeather(this.coordinates);
 		String	announcement = new String();
+		String	previousCoordinates = this.coordinates.toString();
 
 		switch (currentWeather) {
 			case "RAIN":
-				announcement = "Balloon rain";
+				announcement = "Balloon rain ";
 				this.updateCoordinates(0, 0, -5);
 				break;
 			case "FOG":
-				announcement = "Balloon fog";
-				this.updateCoordinates(0, 0, 3);
+				announcement = "Balloon fog ";
+				this.updateCoordinates(0, 0, -3);
 				break;
 			case "SUN":
-				announcement = "Balloon sun";
+				announcement = "Balloon sun ";
 				this.updateCoordinates(2, 0, 4);
 				break;
 			case "SNOW":
-				announcement = "Balloon snow";
-				this.updateCoordinates(0, 0, 15);
+				announcement = "Balloon snow ";
+				this.updateCoordinates(0, 0, -15);
 				break;
 			default:
 				break;
@@ -37,15 +36,18 @@ public class Balloon extends Aircraft {
 
 		System.out.println(
 			this.getClass().getSimpleName() + "#" + this.getName()
-			+ "(" + this.getId() + "): "
-			+ announcement
+			+ "(" + this.getId() + "): " + announcement
 		);
 
+		System.out.println("\t" + previousCoordinates + " -> " + this.coordinates.toString());
+
 		if (this.coordinates.getHeight() <= 0) {
+			this.flying = false;
 			System.out.println(
 				this.getClass().getSimpleName() + "#" + this.getName()
-				+ "(" + this.getId() + ") landing"
+				+ "(" + this.getId() + ") landing."
 			);
-		}
+		} else
+			this.flying = true;
 	}
 }

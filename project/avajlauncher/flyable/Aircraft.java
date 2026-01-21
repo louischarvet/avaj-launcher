@@ -1,6 +1,5 @@
 package avajlauncher.flyable;
 
-//import avajlauncher.Flyable;
 import avajlauncher.Coordinates;
 
 public abstract class Aircraft extends Flyable {
@@ -12,6 +11,7 @@ public abstract class Aircraft extends Flyable {
 		this.id = p_id;
 		this.name = p_name;
 		this.coordinates = p_coordinate;
+		this.flying = false;
 	}
 
 	protected void	updateCoordinates(int longitude, int latitude, int height) {

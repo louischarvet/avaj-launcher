@@ -14,6 +14,9 @@ import avajlauncher.flyable.Flyable;
 import avajlauncher.WeatherProvider;
 
 public class AvajLauncher {
+	private static	Parser	parser = null;
+	private static	List< Flyable >	flyables = new ArrayList<>();
+
 	public static void main(String args[]) {
 		if (args.length < 1) {
 			System.out.println("Wrong number of arguments.\n"
@@ -21,21 +24,13 @@ public class AvajLauncher {
 			return ;
 		}
 	
-		Parser	parser = new Parser(args[0]);
-		if (!parser.isOk())
+		parser = new Parser(args[0]);
+		if (parser == null || !parser.isOk())
 			return ;
 
-		System.out.println(parser.getLines());
-//		System.out.println();
-//		System.out.println(parser.getAircraftPlans());
-
-//		AircraftFactory	aircraftFactory = AircraftFactory.getInstance();
-		List< Flyable >	flyables = new ArrayList<>();
+//		List< Flyable >	flyables = new ArrayList<>();
 		List< AircraftPlan >	aircraftPlans = parser.getAircraftPlans();
-		// ListIterator< AircraftPlan >	it = aircraftPlans.listIterator();
 
-		// while (it.hasNext()) {
-			// AircraftPlan	aircraftPlan = it.next();
 		WeatherTower	weatherTower = new WeatherTower();
 
 		for (AircraftPlan aircraftPlan : aircraftPlans) {
@@ -52,7 +47,8 @@ public class AvajLauncher {
 		}
 
 		// run simulation
-
-		weatherTower.changeWeather();
+		int	n = parser.getNumberOfIterations();
+		for (int i = 0; i < n; i++)
+			weatherTower.changeWeather();
 	}
 }

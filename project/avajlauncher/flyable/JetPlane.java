@@ -1,6 +1,5 @@
 package avajlauncher.flyable;
 
-//import avajlauncher.Aircraft;
 import avajlauncher.Coordinates;
 
 public class JetPlane extends Aircraft {
@@ -10,25 +9,25 @@ public class JetPlane extends Aircraft {
 
 	@Override
 	public void	updateConditions() {
-		// String	currentWeather = WeatherProvider.getCurrentWeather(this.coordinates);
 		String	currentWeather = this.weatherTower.getWeather(this.coordinates);
 		String	announcement = new String();
+		String	previousCoordinates = this.coordinates.toString();
 
 		switch (currentWeather) {
 			case "RAIN":
-				announcement = "JetPlane rain";
+				announcement = "JetPlane rain ";
 				this.updateCoordinates(5, 0, 0);
 				break;
 			case "FOG":
-				announcement = "JetPlane fog";
+				announcement = "JetPlane fog ";
 				this.updateCoordinates(0, 1, 0);
 				break;
 			case "SUN":
-				announcement = "JetPlane sun";
+				announcement = "JetPlane sun ";
 				this.updateCoordinates(0, 10, -2);
 				break;
 			case "SNOW":
-				announcement = "JetPlane snow";
+				announcement = "JetPlane snow ";
 				this.updateCoordinates(0, 0, -7);
 				break;
 			default:
@@ -41,11 +40,15 @@ public class JetPlane extends Aircraft {
 			+ announcement
 		);
 
+		System.out.println("\t" + previousCoordinates + " -> " + this.coordinates.toString());
+
 		if (this.coordinates.getHeight() <= 0) {
+			this.flying = false;
 			System.out.println(
 				this.getClass().getSimpleName() + "#" + this.getName()
 				+ "(" + this.getId() + ") landing"
 			);
-		}
+		} else
+			this.flying = true;
 	}
 }

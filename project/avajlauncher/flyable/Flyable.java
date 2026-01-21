@@ -4,6 +4,7 @@ import avajlauncher.WeatherTower;
 
 public abstract class Flyable {
 	protected WeatherTower	weatherTower;
+	public boolean	flying;
 
 	public abstract void	updateConditions();
 

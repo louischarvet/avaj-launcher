@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.ArrayList;
 
-//import avajlauncher.exception;
 import avajlauncher.exception.InvalidFormatException;
 import avajlauncher.exception.InvalidValueException;
 
@@ -19,7 +18,7 @@ public class Parser {
 	private static List< String >	lines;
 	private static int	numberOfIterations;
 	private static List< AircraftPlan >	aircraftPlans;
-	private boolean	ok;
+	private static boolean	ok;
 
 	public Parser(String filePath) {
 		this.ok = false;
@@ -46,7 +45,7 @@ public class Parser {
 		while (scanner.hasNextLine()) {
 			String	line = scanner.nextLine();
 
-			if (!line.isEmpty() && line != "\n") //
+			if (!line.isEmpty() && line != "\n")
 				linesList.add(line);
 		}
 
@@ -55,13 +54,10 @@ public class Parser {
 
 	private void checkLines() throws Exception {
 		ListIterator< String >	it = this.lines.listIterator();
-
 		if (!it.hasNext())
 			throw new InvalidFormatException("Empty file");
 
 		String firstLine = it.next();
-//		this.numberOfIterations = Integer.parseInt(firstLine); // throws NumberFormatException
-
 		if (!it.hasNext())
 			throw new InvalidFormatException("No aircraft set");
 
@@ -101,6 +97,7 @@ public class Parser {
 			int	longitude = Integer.parseInt(splitLine[2]),
 				latitude = Integer.parseInt(splitLine[3]),
 				height = Integer.parseInt(splitLine[4]);
+
 			this.aircraftPlans.add(new AircraftPlan(
 				type, name, longitude, latitude, height));
 		}
@@ -116,5 +113,9 @@ public class Parser {
 
 	public List< AircraftPlan >	getAircraftPlans() {
 		return this.aircraftPlans;
+	}
+
+	public int	getNumberOfIterations() {
+		return this.numberOfIterations;
 	}
 }
