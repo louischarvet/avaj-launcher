@@ -15,19 +15,19 @@ public class JetPlane extends Aircraft {
 
 		switch (currentWeather) {
 			case "RAIN":
-				announcement = "JetPlane rain ";
+				announcement = "Mum, it's raining, please make it stop.";
 				this.updateCoordinates(5, 0, 0);
 				break;
 			case "FOG":
-				announcement = "JetPlane fog ";
+				announcement = "I can't see anything ! Where did the world go ?";
 				this.updateCoordinates(0, 1, 0);
 				break;
 			case "SUN":
-				announcement = "JetPlane sun ";
+				announcement = "Oh, someone finally changed the light bulb.";
 				this.updateCoordinates(0, 10, -2);
 				break;
 			case "SNOW":
-				announcement = "JetPlane snow ";
+				announcement = "Did I let the fridge open ?";
 				this.updateCoordinates(0, 0, -7);
 				break;
 			default:
@@ -40,14 +40,13 @@ public class JetPlane extends Aircraft {
 			+ announcement
 		);
 
-		System.out.println("\t" + previousCoordinates + " -> " + this.coordinates.toString());
-
 		if (this.coordinates.getHeight() <= 0) {
 			this.flying = false;
 			System.out.println(
 				this.getClass().getSimpleName() + "#" + this.getName()
-				+ "(" + this.getId() + ") landing"
+				+ "(" + this.getId() + ") landing."
 			);
+			this.weatherTower.unregister(this);
 		} else
 			this.flying = true;
 	}

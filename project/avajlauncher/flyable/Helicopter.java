@@ -18,19 +18,19 @@ public class Helicopter extends Aircraft {
 
 		switch (currentWeather) {
 			case "RAIN":
-				announcement = "Helicopter rain ";
+				announcement = "I like rain. Okamari no suzuki.";
 				this.updateCoordinates(5, 0, 0);
 				break;
 			case "FOG":
-				announcement = "Helicopter fog ";
+				announcement = "Ninja fog, you can't see me !";
 				this.updateCoordinates(1, 0, 0);
 				break;
 			case "SUN":
-				announcement = "Helicopter sun ";
+				announcement = "Sun is so overrated man.";
 				this.updateCoordinates(10, 0, 2);
 				break;
 			case "SNOW":
-				announcement = "Helicopter snow ";
+				announcement = "Huh... my heart is colder than this.";
 				this.updateCoordinates(0, 0, -12);
 				break;
 			default:
@@ -43,14 +43,13 @@ public class Helicopter extends Aircraft {
 			+ announcement
 		);
 
-		System.out.println("\t" + previousCoordinates + " -> " + this.coordinates.toString());
-
 		if (this.coordinates.getHeight() <= 0) {
 			this.flying = false;
 			System.out.println(
 				this.getClass().getSimpleName() + "#" + this.getName()
-				+ "(" + this.getId() + ") landing"
+				+ "(" + this.getId() + ") landing."
 			);
+			this.weatherTower.unregister(this);
 		} else
 			this.flying = true;
 	}

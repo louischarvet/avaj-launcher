@@ -27,14 +27,6 @@ public class Tower {
 	}
 
 	public void	unregister(Flyable p_flyable) {
-		// ListIterator< Flyable >	it = observers.listIterator(
-			// observers.indexOf(p_flyable)
-		// );
-		if (this.removeIt != null) {
-			this.removeIt.remove();
-			this.removeIt = null;
-		}
-	//	this.observers.remove(p_flyable);
 		Aircraft	aircraft = (Aircraft) p_flyable;
 		String	announcement = "Tower says: " + aircraft.getClass().getSimpleName()
 			+ "#" + aircraft.getName() + "(" + aircraft.getId()
@@ -51,10 +43,8 @@ public class Tower {
 			Flyable	observer = it.next();
 			observer.updateConditions();
 			
-			if (observer.flying == false) {
-				removeIt = it;
-				this.unregister(observer);
-			}
+ 			if (observer.flying == false)
+				it.remove();
 		}
 	}
 }

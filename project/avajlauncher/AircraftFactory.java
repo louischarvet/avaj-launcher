@@ -9,22 +9,11 @@ import avajlauncher.flyable.JetPlane;
 import avajlauncher.flyable.Balloon;
 
 public final class AircraftFactory {
-	private static volatile	AircraftFactory instance = null;
 	private	static long	id = 1;
 
 	private AircraftFactory() {
 		super();
 	}
-
-	// public final static AircraftFactory	getInstance() { // inutile ?
-	// 	if (AircraftFactory.instance == null) {
-	// 		synchronized(AircraftFactory.class) {
-	// 			if (AircraftFactory.instance == null)
-	// 				AircraftFactory.instance = new AircraftFactory();
-	// 		}
-	// 	}
-	// 	return AircraftFactory.instance;
-	// }
 
 	public static Flyable	newAircraft(String p_type, String p_name, Coordinates p_coordinates) {
 		switch (p_type) {

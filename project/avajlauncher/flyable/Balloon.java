@@ -15,19 +15,19 @@ public class Balloon extends Aircraft {
 
 		switch (currentWeather) {
 			case "RAIN":
-				announcement = "Balloon rain ";
+				announcement = "I already took a shower this morning, thank you.";
 				this.updateCoordinates(0, 0, -5);
 				break;
 			case "FOG":
-				announcement = "Balloon fog ";
+				announcement = "What the fog ?";
 				this.updateCoordinates(0, 0, -3);
 				break;
 			case "SUN":
-				announcement = "Balloon sun ";
+				announcement = "Like father like sun ! I have to write this one.";
 				this.updateCoordinates(2, 0, 4);
 				break;
 			case "SNOW":
-				announcement = "Balloon snow ";
+				announcement = "It's so cold my balloon is retracting !";
 				this.updateCoordinates(0, 0, -15);
 				break;
 			default:
@@ -39,14 +39,13 @@ public class Balloon extends Aircraft {
 			+ "(" + this.getId() + "): " + announcement
 		);
 
-		System.out.println("\t" + previousCoordinates + " -> " + this.coordinates.toString());
-
 		if (this.coordinates.getHeight() <= 0) {
 			this.flying = false;
 			System.out.println(
 				this.getClass().getSimpleName() + "#" + this.getName()
 				+ "(" + this.getId() + ") landing."
 			);
+			this.weatherTower.unregister(this);
 		} else
 			this.flying = true;
 	}

@@ -3,7 +3,6 @@ package avajlauncher;
 import java.util.Random;
 
 public final class	WeatherProvider {
-	private static volatile WeatherProvider	instance = null;
 	private static String	weather[] = {
 		"RAIN",
 		"FOG",
@@ -15,16 +14,6 @@ public final class	WeatherProvider {
 	private WeatherProvider() {
 		super();
 	}
-
-	// public final static WeatherProvider	getInstance() { // inutile ?
-	// 	if (WeatherProvider.instance == null) {
-	// 		synchronized(WeatherProvider.class) {
-	// 			if (WeatherProvider.instance == null)
-	// 				WeatherProvider.instance = new WeatherProvider();
-	// 		}
-	// 	}
-	// 	return WeatherProvider.instance;
-	// }
 
 	public static String	getCurrentWeather(Coordinates p_coordinates) {
 		int	longitude = normalizeCoordinate(p_coordinates.getLongitude()),
