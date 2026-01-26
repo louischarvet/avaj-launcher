@@ -39,6 +39,8 @@ public class Balloon extends Aircraft {
 			+ "(" + this.getId() + "): " + announcement
 		);
 
+		System.out.println("\t" + this.coordinates.toString());
+
 		if (this.coordinates.getHeight() <= 0) {
 			this.flying = false;
 			System.out.println(

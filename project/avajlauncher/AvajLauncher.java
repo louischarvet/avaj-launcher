@@ -11,11 +11,12 @@ import avajlauncher.AircraftFactory;
 
 import avajlauncher.flyable.Flyable;
 
-import avajlauncher.WeatherProvider;
+import avajlauncher.tower.WeatherTower;
 
 public class AvajLauncher {
 	private static	Parser	parser = null;
 	private static	List< Flyable >	flyables = new ArrayList<>();
+	private static	WeatherTower	weatherTower = new WeatherTower();
 
 	public static void main(String args[]) {
 		if (args.length < 1) {
@@ -28,11 +29,12 @@ public class AvajLauncher {
 		if (parser == null || !parser.isOk())
 			return ;
 
-//		List< Flyable >	flyables = new ArrayList<>();
-		List< AircraftPlan >	aircraftPlans = parser.getAircraftPlans();
+		setFlyables(parser.getAircraftPlans());
+		register();
+		runSimulation(parser.getNumberOfIterations());
+	}
 
-		WeatherTower	weatherTower = new WeatherTower();
-
+	private static void	setFlyables(List< AircraftPlan > aircraftPlans) {
 		for (AircraftPlan aircraftPlan : aircraftPlans) {
 			flyables.add(AircraftFactory.newAircraft(
 				aircraftPlan.getType(),
@@ -40,14 +42,16 @@ public class AvajLauncher {
 				aircraftPlan.getCoordinates()
 			));
 		}
+	}
 
+	private static void	register() {
 		for (Flyable flyable : flyables) {
 			weatherTower.register(flyable);
 			flyable.registerTower(weatherTower);
 		}
+	}
 
-		// run simulation
-		int	n = parser.getNumberOfIterations();
+	private static void	runSimulation(int n) {
 		for (int i = 0; i < n; i++)
 			weatherTower.changeWeather();
 	}

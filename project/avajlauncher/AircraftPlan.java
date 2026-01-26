@@ -1,5 +1,7 @@
 package avajlauncher;
 
+import avajlauncher.Coordinates;
+
 public class AircraftPlan {
 	private String	type,
 		name;

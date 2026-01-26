@@ -1,4 +1,4 @@
-package avajlauncher;
+package avajlauncher.tower;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -9,20 +9,20 @@ import avajlauncher.flyable.Aircraft;
 
 public class Tower {
 	private List< Flyable >	observers;
-	private ListIterator< Flyable >	removeIt;
+	private ListIterator< Flyable >	iterator;
 
 	public Tower() {
 		this.observers = new ArrayList<>();
-		this.removeIt = null;
+		this.iterator = null;
 	}
 
 	public void	register(Flyable p_flyable) {
-		this.observers.add(p_flyable);
 		Aircraft	aircraft = (Aircraft) p_flyable;
 		String	announcement = "Tower says: " + aircraft.getClass().getSimpleName()
 			+ "#" + aircraft.getName() + "(" + aircraft.getId()
 			+ ") registered to weather tower.";
 
+		this.observers.add(p_flyable);
 		System.out.println(announcement);
 	}
 
@@ -32,19 +32,18 @@ public class Tower {
 			+ "#" + aircraft.getName() + "(" + aircraft.getId()
 			+ ") unregistered from weather tower.";
 
+		if (this.iterator != null && this.iterator.hasNext())
+			this.iterator.remove();
 		System.out.println(announcement);
 	}
 
 	protected void	conditionChanged() {
 		System.out.println();
-		ListIterator< Flyable >	it = this.observers.listIterator();
+		this.iterator = this.observers.listIterator();
 
-		while (it.hasNext()) {
-			Flyable	observer = it.next();
+		while (this.iterator.hasNext()) {
+			Flyable	observer = this.iterator.next();
 			observer.updateConditions();
-			
- 			if (observer.flying == false)
-				it.remove();
 		}
 	}
 }

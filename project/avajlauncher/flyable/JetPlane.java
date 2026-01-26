@@ -40,6 +40,8 @@ public class JetPlane extends Aircraft {
 			+ announcement
 		);
 
+		System.out.println("\t" + this.coordinates.toString());
+
 		if (this.coordinates.getHeight() <= 0) {
 			this.flying = false;
 			System.out.println(

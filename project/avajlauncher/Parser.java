@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import avajlauncher.exception.InvalidFormatException;
 import avajlauncher.exception.InvalidValueException;
 
-import avajlauncher.AircraftPlan;
-
 public class Parser {
 	private	static List< String >	aircraftTypes;
 	private static List< String >	lines;
@@ -76,7 +74,7 @@ public class Parser {
 				throw new InvalidValueException("Aircraft type", words[0],
 					"Must be one of Helicopter, JetPlane or Balloon");
 
-			for (int i = 2; i < size; i++) { // maybe useless (see parseLines())
+			for (int i = 2; i < size; i++) {
 				if (Integer.parseInt(words[i]) < 0)
 					throw new InvalidValueException("Coordinate", words[i],
 						"Must be positive integer. If height > 100, it will be set to 100.");
@@ -97,6 +95,9 @@ public class Parser {
 			int	longitude = Integer.parseInt(splitLine[2]),
 				latitude = Integer.parseInt(splitLine[3]),
 				height = Integer.parseInt(splitLine[4]);
+
+			if (height > 100)
+				height = 100;
 
 			this.aircraftPlans.add(new AircraftPlan(
 				type, name, longitude, latitude, height));

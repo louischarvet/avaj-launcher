@@ -1,6 +1,6 @@
 package avajlauncher.flyable;
 
-import avajlauncher.WeatherTower;
+import avajlauncher.tower.WeatherTower;
 
 public abstract class Flyable {
 	protected WeatherTower	weatherTower;

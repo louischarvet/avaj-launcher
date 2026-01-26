@@ -1,6 +1,5 @@
 package avajlauncher.flyable;
 
-//import avajlauncher.Aircraft;
 import avajlauncher.Coordinates;
 
 import avajlauncher.WeatherProvider;
@@ -42,6 +41,8 @@ public class Helicopter extends Aircraft {
 			+ "(" + this.getId() + "): "
 			+ announcement
 		);
+
+		System.out.println("\t" + this.coordinates.toString());
 
 		if (this.coordinates.getHeight() <= 0) {
 			this.flying = false;
