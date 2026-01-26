@@ -42,7 +42,7 @@ public class Helicopter extends Aircraft {
 			+ announcement
 		);
 
-		System.out.println("\t" + this.coordinates.toString());
+//		System.out.println("\t" + this.coordinates.toString());
 
 		if (this.coordinates.getHeight() <= 0) {
 			this.flying = false;
