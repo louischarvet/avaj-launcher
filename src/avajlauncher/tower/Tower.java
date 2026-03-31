@@ -46,15 +46,17 @@ public class Tower {
 			+ "#" + aircraft.getName() + "(" + aircraft.getId()
 			+ ") unregistered from weather tower.";
 
-		if (this.iterator != null && this.iterator.hasNext())
-			this.iterator.remove();
+
+		this.iterator.remove();
 
 		this.report(announcement);
 	}
 
 	protected void	conditionChanged() {
-		this.lines.add("");
 		this.iterator = this.observers.listIterator();
+
+		if (this.iterator.hasNext())
+			this.lines.add("");
 
 		while (this.iterator.hasNext()) {
 			Flyable	observer = this.iterator.next();
