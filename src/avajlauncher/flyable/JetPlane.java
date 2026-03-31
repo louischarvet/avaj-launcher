@@ -1,7 +1,5 @@
 package avajlauncher.flyable;
 
-import avajlauncher.Coordinates;
-
 public class JetPlane extends Aircraft {
 	public JetPlane(long p_id, String p_name, Coordinates p_coordinate) {
 		super(p_id, p_name, p_coordinate);
@@ -34,17 +32,12 @@ public class JetPlane extends Aircraft {
 				break;
 		}
 
-		System.out.println(
-			this.getClass().getSimpleName() + "#" + this.getName()
-			+ "(" + this.getId() + "): "
-			+ announcement
-		);
-
-//		System.out.println("\t" + this.coordinates.toString());
+		this.weatherTower.report(this.getClass().getSimpleName() + "#" + this.getName()
+			+ "(" + this.getId() + "): " + announcement);
 
 		if (this.coordinates.getHeight() <= 0) {
 			this.flying = false;
-			System.out.println(
+			this.weatherTower.report(
 				this.getClass().getSimpleName() + "#" + this.getName()
 				+ "(" + this.getId() + ") landing."
 			);

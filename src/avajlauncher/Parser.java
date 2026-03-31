@@ -8,15 +8,17 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.ArrayList;
 
+import avajlauncher.flyable.AircraftPlan;
+
 import avajlauncher.exception.InvalidFormatException;
 import avajlauncher.exception.InvalidValueException;
 
 public class Parser {
-	private	static List< String >	aircraftTypes;
-	private static List< String >	lines;
-	private static int	numberOfIterations;
-	private static List< AircraftPlan >	aircraftPlans;
-	private static boolean	ok;
+	private List< String >	aircraftTypes;
+	private List< String >	lines;
+	private int	numberOfIterations;
+	private List< AircraftPlan >	aircraftPlans;
+	private boolean	ok;
 
 	public Parser(String filePath) {
 		this.ok = false;
@@ -32,11 +34,11 @@ public class Parser {
 			parseLines();
 			this.ok = true;
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("Parser error: " + e.getMessage());
 		}
 	}
 
-	private static List< String >	readFile(String filePath) throws Exception {
+	private List< String >	readFile(String filePath) throws Exception {
 		List< String >	linesList = new ArrayList<>();
 		Scanner scanner = new Scanner(new File(filePath));
 

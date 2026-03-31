@@ -1,4 +1,4 @@
-package avajlauncher;
+package avajlauncher.flyable;
 
 import java.util.List;
 import java.util.ListIterator;

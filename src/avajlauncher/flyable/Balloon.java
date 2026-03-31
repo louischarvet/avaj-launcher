@@ -1,7 +1,5 @@
 package avajlauncher.flyable;
 
-import avajlauncher.Coordinates;
-
 public class Balloon extends Aircraft {
 	public Balloon(long p_id, String p_name, Coordinates p_coordinate) {
 		super(p_id, p_name, p_coordinate);
@@ -15,7 +13,7 @@ public class Balloon extends Aircraft {
 
 		switch (currentWeather) {
 			case "RAIN":
-				announcement = "I already took a shower this morning, thank you.";
+				announcement = "I already took a shower last week, thank you.";
 				this.updateCoordinates(0, 0, -5);
 				break;
 			case "FOG":
@@ -23,7 +21,7 @@ public class Balloon extends Aircraft {
 				this.updateCoordinates(0, 0, -3);
 				break;
 			case "SUN":
-				announcement = "Like father like sun ! I have to write this one.";
+				announcement = "Like father like sun ! LMAO I have to write this one.";
 				this.updateCoordinates(2, 0, 4);
 				break;
 			case "SNOW":
@@ -34,16 +32,12 @@ public class Balloon extends Aircraft {
 				break;
 		}
 
-		System.out.println(
-			this.getClass().getSimpleName() + "#" + this.getName()
-			+ "(" + this.getId() + "): " + announcement
-		);
-
-//		System.out.println("\t" + this.coordinates.toString());
+		this.weatherTower.report(this.getClass().getSimpleName() + "#" + this.getName()
+			+ "(" + this.getId() + "): " + announcement);
 
 		if (this.coordinates.getHeight() <= 0) {
 			this.flying = false;
-			System.out.println(
+			this.weatherTower.report(
 				this.getClass().getSimpleName() + "#" + this.getName()
 				+ "(" + this.getId() + ") landing."
 			);

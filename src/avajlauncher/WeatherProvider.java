@@ -1,6 +1,9 @@
 package avajlauncher;
 
+import java.time.LocalTime;
 import java.util.Random;
+
+import avajlauncher.flyable.Coordinates;
 
 public final class	WeatherProvider {
 	private static String	weather[] = {
@@ -24,7 +27,7 @@ public final class	WeatherProvider {
 		return WeatherProvider.weather[index];
 	}
 
-	private static int	normalizeCoordinate(int coordinate) {
+	private	static int	normalizeCoordinate(int coordinate) {
 		if (coordinate < 0)
 			return 100 + (coordinate % 100);
 		else if (coordinate >= 100)
@@ -33,7 +36,7 @@ public final class	WeatherProvider {
 			return coordinate;
 	}
 
-	private static int	getIndex(int longitude, int latitude, int height) {
+	private	static int	getIndex(int longitude, int latitude, int height) {
 		return WeatherProvider.weatherMap.getValue(longitude, latitude, height);
 	}
 
@@ -42,7 +45,8 @@ public final class	WeatherProvider {
 
 		public WeatherMap(int longitude, int latitude, int height) {
 			this.map = new int[longitude][latitude][height];
-			Random	rand = new Random();
+			long	seed = LocalTime.now().toNanoOfDay() % 100000;
+			Random	rand = new Random(seed);
 
 			for (int i = 0; i < 100; i++) {
 				for (int j = 0; j < 100; j++) {

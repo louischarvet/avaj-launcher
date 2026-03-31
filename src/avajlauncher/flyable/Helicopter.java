@@ -1,7 +1,5 @@
 package avajlauncher.flyable;
 
-import avajlauncher.Coordinates;
-
 import avajlauncher.WeatherProvider;
 
 public class Helicopter extends Aircraft {
@@ -17,7 +15,7 @@ public class Helicopter extends Aircraft {
 
 		switch (currentWeather) {
 			case "RAIN":
-				announcement = "I like rain. Okamari no suzuki.";
+				announcement = "I like rain. I'm so unique.";
 				this.updateCoordinates(5, 0, 0);
 				break;
 			case "FOG":
@@ -36,17 +34,14 @@ public class Helicopter extends Aircraft {
 				break;
 		}
 
-		System.out.println(
+		this.weatherTower.report(
 			this.getClass().getSimpleName() + "#" + this.getName()
-			+ "(" + this.getId() + "): "
-			+ announcement
+			+ "(" + this.getId() + "): " + announcement
 		);
-
-//		System.out.println("\t" + this.coordinates.toString());
 
 		if (this.coordinates.getHeight() <= 0) {
 			this.flying = false;
-			System.out.println(
+			this.weatherTower.report(
 				this.getClass().getSimpleName() + "#" + this.getName()
 				+ "(" + this.getId() + ") landing."
 			);

@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 import avajlauncher.Parser;
-import avajlauncher.AircraftPlan;
 
-import avajlauncher.AircraftFactory;
+import avajlauncher.flyable.AircraftPlan;
+import avajlauncher.flyable.AircraftFactory;
 
 import avajlauncher.flyable.Flyable;
 
 import avajlauncher.tower.WeatherTower;
 
-public class AvajLauncher {
+public class Main {
 	private static	Parser	parser = null;
 	private static	List< Flyable >	flyables = new ArrayList<>();
-	private static	WeatherTower	weatherTower = new WeatherTower();
+	private static	WeatherTower	weatherTower;
 
 	public static void main(String args[]) {
 		if (args.length < 1) {
@@ -28,6 +28,12 @@ public class AvajLauncher {
 		parser = new Parser(args[0]);
 		if (parser == null || !parser.isOk())
 			return ;
+
+		try {
+			weatherTower = new WeatherTower();
+		} catch (Exception e) {
+			return ;
+		}
 
 		setFlyables(parser.getAircraftPlans());
 		register();
@@ -54,5 +60,6 @@ public class AvajLauncher {
 	private static void	runSimulation(int n) {
 		for (int i = 0; i < n; i++)
 			weatherTower.changeWeather();
+		weatherTower.write();
 	}
 }

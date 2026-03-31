@@ -1,6 +1,4 @@
-package avajlauncher;
-
-import avajlauncher.Coordinates;
+package avajlauncher.flyable;
 
 public class AircraftPlan {
 	private String	type,

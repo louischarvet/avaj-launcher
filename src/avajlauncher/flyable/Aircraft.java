@@ -1,7 +1,5 @@
 package avajlauncher.flyable;
 
-import avajlauncher.Coordinates;
-
 public abstract class Aircraft extends Flyable {
 	protected long	id;
 	protected String	name;
